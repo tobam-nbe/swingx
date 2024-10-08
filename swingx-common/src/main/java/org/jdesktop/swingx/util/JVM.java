@@ -25,6 +25,7 @@ import javax.swing.UIManager.LookAndFeelInfo;
 
 /**
  * Deals with the different version of the Java Virtual Machine. <br>
+ * To be replaced by commons-lang's SystemUtils or another sane implementation
  */
 @SuppressWarnings("nls")
 public class JVM {
@@ -38,6 +39,20 @@ public class JVM {
   public final static int JDK1_6 = 1600;
   public final static int JDK1_6N = 1610;
   public final static int JDK1_7 = 1700;
+  public final static int JDK1_8 = 1800;
+  public final static int JDK9 = 9000;
+  public final static int JDK10 = 10000;
+  public final static int JDK11 = 11000;
+  public final static int JDK12 = 12000;
+  public final static int JDK13 = 13000;
+  public final static int JDK14 = 14000;
+  public final static int JDK15 = 15000;
+  public final static int JDK16 = 16000;
+  public final static int JDK17 = 17000;
+  public final static int JDK18 = 18000;
+  public final static int JDK19 = 19000;
+  public final static int JDK20 = 20000;
+  public final static int JDK21 = 21000;
 
   private static JVM current;
   static {
@@ -59,14 +74,42 @@ public class JVM {
    *  
    */
   public JVM() {
-    this(System.getProperty("java.version"));
+    this(System.getProperty("java.version"), System.getProperty("java.specification.version"));
   }
 
   /**
    * Constructor for the OS object
    */
-  public JVM(String p_JavaVersion) {
-    if (p_JavaVersion.startsWith("1.7.")) {
+  public JVM(String p_JavaVersion, String javaSpecificationVersion) {
+    if (javaSpecificationVersion.equals("21")) {
+      jdkVersion = JDK21;
+    } else if (javaSpecificationVersion.equals("20")) {
+      jdkVersion = JDK20;
+    } else if (javaSpecificationVersion.equals("19")) {
+      jdkVersion = JDK19;
+    } else if (javaSpecificationVersion.equals("18")) {
+      jdkVersion = JDK18;
+    } else if (javaSpecificationVersion.equals("17")) {
+      jdkVersion = JDK17;
+    } else if (javaSpecificationVersion.equals("16")) {
+      jdkVersion = JDK16;
+    } else if (javaSpecificationVersion.equals("15")) {
+      jdkVersion = JDK15;
+    } else if (javaSpecificationVersion.equals("14")) {
+      jdkVersion = JDK14;
+    } else if (javaSpecificationVersion.equals("13")) {
+      jdkVersion = JDK13;
+    } else if (javaSpecificationVersion.equals("12")) {
+      jdkVersion = JDK12;
+    } else if (javaSpecificationVersion.equals("11")) {
+      jdkVersion = JDK11;
+    } else if (javaSpecificationVersion.equals("10")) {
+      jdkVersion = JDK10;
+    } else if (javaSpecificationVersion.equals("9")) {
+      jdkVersion = JDK9;
+    } else if (p_JavaVersion.startsWith("1.8.")) {
+      jdkVersion = JDK1_8;
+    } else if (p_JavaVersion.startsWith("1.7.")) {
       jdkVersion = JDK1_7;
     } else if (p_JavaVersion.startsWith("1.6.")) {
       for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
